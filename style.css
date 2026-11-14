@@ -5,21 +5,46 @@
     box-sizing: border-box;
 }
 
+html{
+    -webkit-text-size-adjust: 100%;
+}
+
+body{
+    min-height: 100vh;
+    min-height: 100dvh;
+    overflow-x: hidden;
+    background: black;
+}
+
+/* ---------- Base (works on every screen) ---------- */
+
 .container{
-    height: 100vh;
-    width: 100vw;
+    min-height: 100vh;
+    min-height: 100dvh;
+    width: 100%;
     color: #444;
-    background:#ffe7e3;
+    background: #ffe7e3;
     text-align: center;
+
+    /* center the content on any screen size */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
 }
 
 .love, .yes, .no{
-    padding-top: 25%;
+    width: 100%;
+    max-width: 1100px;
+    padding-top: 0;
 }
 
+/* font size grows and shrinks with the screen: min, preferred, max */
 h2{
-    font-size: 72px;
-    margin-bottom: 30px;
+    font-size: clamp(28px, 7vw, 72px);
+    line-height: 1.25;
+    margin-bottom: clamp(18px, 4vw, 30px);
+    overflow-wrap: break-word;
 }
 
 #me{
@@ -31,29 +56,43 @@ h2{
 }
 
 .love a{
+    display: inline-block;
     text-decoration-line: none;
     background: #eee;
-    padding: 5px;
-    margin: 5px 10px;
-    border:3px solid #ddd;
+    padding: 8px 18px;
+    margin: 8px 10px;
+    border: 3px solid #ddd;
     border-radius: 10px;
+    min-width: 76px;
+    min-height: 44px; /* comfortable finger tap size */
+    transition: transform 0.15s;
+}
+
+.love a:hover{
+    transform: scale(1.06);
+}
+
+.love a:focus-visible{
+    outline: 3px solid #d36577;
+    outline-offset: 3px;
 }
 
 #no{
     color: red;
-    font-size: 1.5rem;
+    font-size: clamp(1.1rem, 3.5vw, 1.5rem);
     font-weight: bold;
 }
 
 #yes{
-    color:  green;
-    font-size: 1.5rem;
+    color: green;
+    font-size: clamp(1.1rem, 3.5vw, 1.5rem);
     font-weight: bold;
 }
 
 img{
-    width: 50px;
-    height: 50px;
+    width: clamp(28px, 6vw, 50px);
+    height: clamp(28px, 6vw, 50px);
+    vertical-align: middle;
     animation: heart 4s linear infinite;
 }
 
@@ -70,12 +109,124 @@ img{
 }
 
 .flower {
-  display: inline-block; /* required for transform to work */
-  font-size: 4rem;
-  animation: spin 3s linear infinite;
+    display: inline-block; /* required for transform to work */
+    font-size: clamp(1.8rem, 7vw, 4rem);
+    animation: spin 3s linear infinite;
 }
 
 @keyframes spin {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+
+
+/* ---------- Very small phones (up to 360px wide) ---------- */
+@media (max-width: 360px){
+    .container{
+        padding: 14px;
+    }
+    h2{
+        font-size: 26px;
+    }
+    .love a{
+        padding: 8px 14px;
+        margin: 6px 6px;
+    }
+}
+
+/* ---------- Phones (up to 480px wide) ---------- */
+@media (max-width: 480px){
+    .love a{
+        display: block;      /* Yes / No stacked, full width */
+        width: 100%;
+        max-width: 260px;
+        margin: 12px auto;
+    }
+}
+
+/* ---------- Large phones and small tablets (481px to 768px) ---------- */
+@media (min-width: 481px) and (max-width: 768px){
+    .container{
+        padding: 28px;
+    }
+}
+
+/* ---------- Tablets (769px to 1024px) ---------- */
+@media (min-width: 769px) and (max-width: 1024px){
+    .love, .yes, .no{
+        max-width: 860px;
+    }
+}
+
+/* ---------- Laptops and desktops (1025px and up) ---------- */
+@media (min-width: 1025px){
+    .love a{
+        padding: 10px 26px;
+    }
+}
+
+/* ---------- Large screens and TVs (1600px and up) ---------- */
+@media (min-width: 1600px){
+    .love, .yes, .no{
+        max-width: 1400px;
+    }
+    h2{
+        font-size: 88px;
+    }
+    img{
+        width: 64px;
+        height: 64px;
+    }
+    .flower{
+        font-size: 5rem;
+    }
+}
+
+/* ---------- 4K screens (2560px and up) ---------- */
+@media (min-width: 2560px){
+    .love, .yes, .no{
+        max-width: 1900px;
+    }
+    h2{
+        font-size: 120px;
+    }
+    img{
+        width: 90px;
+        height: 90px;
+    }
+    .flower{
+        font-size: 7rem;
+    }
+    .love a{
+        padding: 16px 40px;
+    }
+    #no, #yes{
+        font-size: 2.5rem;
+    }
+}
+
+/* ---------- Phone turned sideways (low height) ---------- */
+@media (max-height: 500px) and (orientation: landscape){
+    .container{
+        padding: 10px;
+    }
+    h2{
+        font-size: clamp(22px, 6vh, 40px);
+        margin-bottom: 10px;
+    }
+    .love a{
+        display: inline-block;
+        width: auto;
+        margin: 6px 10px;
+    }
+}
+
+/* ---------- Respect people who prefer less motion ---------- */
+@media (prefers-reduced-motion: reduce){
+    img, .flower{
+        animation: none;
+    }
+    .love a{
+        transition: none;
+    }
 }
