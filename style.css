@@ -1,0 +1,81 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+}
+
+.container{
+    height: 100vh;
+    width: 100vw;
+    color: #444;
+    background:#ffe7e3;
+    text-align: center;
+}
+
+.love, .yes, .no{
+    padding-top: 25%;
+}
+
+h2{
+    font-size: 72px;
+    margin-bottom: 30px;
+}
+
+#me{
+    color: #fc9786;
+}
+
+#them{
+    color: rgb(211, 101, 119);
+}
+
+.love a{
+    text-decoration-line: none;
+    background: #eee;
+    padding: 5px;
+    margin: 5px 10px;
+    border:3px solid #ddd;
+    border-radius: 10px;
+}
+
+#no{
+    color: red;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+#yes{
+    color:  green;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+img{
+    width: 50px;
+    height: 50px;
+    animation: heart 4s linear infinite;
+}
+
+@keyframes heart{
+    0%{
+        transform: scale(0.5);
+    }
+    50%{
+        transform: scale(1.5);
+    }
+    100%{
+        transform: scale(.5);
+    }
+}
+
+.flower {
+  display: inline-block; /* required for transform to work */
+  font-size: 4rem;
+  animation: spin 3s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
